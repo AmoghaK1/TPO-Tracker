@@ -13,7 +13,7 @@ def main():
 
     new_companies = list(set(current) - set(old))
 
-    print("🆕 New Companies:", new_companies)
+    print("New Companies:", new_companies)
 
     # 🔥 SEND TELEGRAM ALERT
     if new_companies:

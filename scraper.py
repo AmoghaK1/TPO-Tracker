@@ -48,7 +48,7 @@ def login(driver):
     # Wait for next page (dashboard)
     time.sleep(5)
 
-    print("✅ Logged in")
+    print("Logged in")
 
 def get_companies(driver):
     from selenium.webdriver.common.by import By
@@ -75,6 +75,6 @@ def get_companies(driver):
         if name:
             companies.append(name)
 
-    print("📊 Companies Found:", companies)
+    print("Companies Found:", companies)
 
     return companies

@@ -1,4 +1,6 @@
 @echo off
 cd /d "G:\PROGRAMMING\MAJOR PROJECTS\TPO-tracker"
-call .venv\Scripts\activate
-python main.py
+
+mkdir logs 2>nul
+
+.\.venv\Scripts\python.exe main.py >> logs\log.txt 2>&1
