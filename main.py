@@ -17,7 +17,11 @@ def main():
 
     # 🔥 SEND TELEGRAM ALERT
     if new_companies:
-        message = "🚀 New Companies Added:\n" + "\n".join(new_companies)
+        message = (
+            "🚀 New Companies Added:\n"
+            + "\n".join(new_companies)
+            + "\n\nApply here: https://tpo.vierp.in"
+        )
         send_telegram(message)
 
     save_companies(current)
