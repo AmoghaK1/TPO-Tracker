@@ -11,11 +11,10 @@ import config
 
 def start_driver():
     options = Options()
-
-    options.add_argument("--headless=new")  
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
+    
+    options.add_argument("--disable-autofill")
+    options.add_argument("--disable-save-password-bubble")
+    options.add_argument("--incognito")  # 🔥 THIS FIXES IT
 
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
@@ -35,6 +34,10 @@ def login(driver):
     password_input = driver.find_element(By.XPATH, '//input[@type="password"]')
 
     # Enter credentials
+   # Force clear via JS (important)
+    driver.execute_script("arguments[0].value = '';", username_input)
+    driver.execute_script("arguments[0].value = '';", password_input)
+
     username_input.send_keys(config.USERNAME)
     password_input.send_keys(config.PASSWORD)
 
