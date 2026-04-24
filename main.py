@@ -4,30 +4,33 @@ from notifier import send_telegram
 
 
 def main():
-    driver = start_driver()
+    driver = None
 
-    login(driver)
+    try:
+        driver = start_driver()
 
-    current = get_companies(driver)
-    old = load_old_companies()
+        login(driver)
 
-    new_companies = list(set(current) - set(old))
+        current = get_companies(driver)
+        old = load_old_companies()
 
-    print("New Companies:", new_companies)
+        new_companies = list(set(current) - set(old))
 
-    # 🔥 SEND TELEGRAM ALERT
-    if new_companies:
-        message = (
-            "🚀 New Companies Added:\n"
-            + "\n".join(new_companies)
-            + "\n\nApply here: https://tpo.vierp.in"
-        )
-        send_telegram(message)
+        print("New Companies:", new_companies)
 
-    save_companies(current)
+        # Send Telegram alert when new companies appear.
+        if new_companies:
+            message = (
+                "🚀 New Companies Added:\n"
+                + "\n".join(new_companies)
+                + "\n\nApply here: https://tpo.vierp.in"
+            )
+            send_telegram(message)
 
-    input("Press Enter to close...")
-    driver.quit()
+        save_companies(current)
+    finally:
+        if driver is not None:
+            driver.quit()
 
 if __name__ == "__main__":
     main()
